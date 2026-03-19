@@ -1,0 +1,727 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B24056B82C1A364400EB5C0A /* Mindful_MorningsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24056B72C1A364400EB5C0A /* Mindful_MorningsApp.swift */; };
+		B24056BA2C1A364400EB5C0A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24056B92C1A364400EB5C0A /* ContentView.swift */; };
+		B24056BE2C1A364A00EB5C0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B24056BD2C1A364A00EB5C0A /* Assets.xcassets */; };
+		B24056C12C1A364A00EB5C0A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B24056C02C1A364A00EB5C0A /* Preview Assets.xcassets */; };
+		B24056CB2C1A364A00EB5C0A /* Mindful_MorningsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24056CA2C1A364A00EB5C0A /* Mindful_MorningsTests.swift */; };
+		B24056D52C1A364B00EB5C0A /* Mindful_MorningsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24056D42C1A364B00EB5C0A /* Mindful_MorningsUITests.swift */; };
+		B24056D72C1A364B00EB5C0A /* Mindful_MorningsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24056D62C1A364B00EB5C0A /* Mindful_MorningsUITestsLaunchTests.swift */; };
+		B24EFB632F416FB70094915E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24EFB622F416FB70094915E /* Theme.swift */; };
+		B256B2A42F52927E004F084B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256B2A22F52927E004F084B /* NotificationManager.swift */; };
+		B256B2A62F529651004F084B /* OnboardingCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256B2A52F529650004F084B /* OnboardingCarouselView.swift */; };
+		B2AB2B692F528A0900841681 /* HabitHeatmapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AB2B682F528A0900841681 /* HabitHeatmapView.swift */; };
+		B2AB2B6B2F528C0F00841681 /* ReflectionEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AB2B6A2F528C0F00841681 /* ReflectionEntry.swift */; };
+		B2AB2B6D2F528C3300841681 /* EveningReflectionSurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AB2B6C2F528C3300841681 /* EveningReflectionSurveyView.swift */; };
+		B2AB2B6F2F528C5700841681 /* ReflectionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2AB2B6E2F528C5700841681 /* ReflectionHistoryView.swift */; };
+		B2AB2B732F528F9E00841681 /* MindfulMornings.storekit in Resources */ = {isa = PBXBuildFile; fileRef = B2AB2B722F528F9E00841681 /* MindfulMornings.storekit */; };
+		B2B41D932C1A4D430003FF7D /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B41D922C1A4D430003FF7D /* LandingView.swift */; };
+		B2B41D952C1A4D580003FF7D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B41D942C1A4D580003FF7D /* LoginView.swift */; };
+		B2B41D972C1A4D690003FF7D /* MantraSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B41D962C1A4D690003FF7D /* MantraSelectionView.swift */; };
+		B2B41D992C1A4D780003FF7D /* CustomMantrasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B41D982C1A4D780003FF7D /* CustomMantrasView.swift */; };
+		B2B41D9B2C1A4D890003FF7D /* PresetMantrasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B41D9A2C1A4D890003FF7D /* PresetMantrasView.swift */; };
+		B2B41D9D2C1A4D960003FF7D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B41D9C2C1A4D960003FF7D /* HomeView.swift */; };
+		B2B41D9F2C1A4DA60003FF7D /* ManageAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B41D9E2C1A4DA60003FF7D /* ManageAccountView.swift */; };
+		B2B41DA12C1A4DB30003FF7D /* TodaysRoutineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B41DA02C1A4DB30003FF7D /* TodaysRoutineView.swift */; };
+		B2B41DA32C1B24320003FF7D /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B41DA22C1B24320003FF7D /* UserData.swift */; };
+		B2B41DA52C1B2D330003FF7D /* DonateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B41DA42C1B2D330003FF7D /* DonateView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B24056C72C1A364A00EB5C0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B24056AC2C1A364400EB5C0A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B24056B32C1A364400EB5C0A;
+			remoteInfo = "Mindful Mornings";
+		};
+		B24056D12C1A364B00EB5C0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B24056AC2C1A364400EB5C0A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B24056B32C1A364400EB5C0A;
+			remoteInfo = "Mindful Mornings";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B2B41DAD2C1B877C0003FF7D /* Embed PlugIns */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed PlugIns";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		B24056B42C1A364400EB5C0A /* Mindful Mornings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mindful Mornings.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B24056B72C1A364400EB5C0A /* Mindful_MorningsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mindful_MorningsApp.swift; sourceTree = "<group>"; };
+		B24056B92C1A364400EB5C0A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B24056BD2C1A364A00EB5C0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B24056C02C1A364A00EB5C0A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B24056C62C1A364A00EB5C0A /* Mindful MorningsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mindful MorningsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B24056CA2C1A364A00EB5C0A /* Mindful_MorningsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mindful_MorningsTests.swift; sourceTree = "<group>"; };
+		B24056D02C1A364B00EB5C0A /* Mindful MorningsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Mindful MorningsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B24056D42C1A364B00EB5C0A /* Mindful_MorningsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mindful_MorningsUITests.swift; sourceTree = "<group>"; };
+		B24056D62C1A364B00EB5C0A /* Mindful_MorningsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mindful_MorningsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B24EFB622F416FB70094915E /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		B256B2A22F52927E004F084B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		B256B2A52F529650004F084B /* OnboardingCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCarouselView.swift; sourceTree = "<group>"; };
+		B2AB2B682F528A0900841681 /* HabitHeatmapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitHeatmapView.swift; sourceTree = "<group>"; };
+		B2AB2B6A2F528C0F00841681 /* ReflectionEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionEntry.swift; sourceTree = "<group>"; };
+		B2AB2B6C2F528C3300841681 /* EveningReflectionSurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EveningReflectionSurveyView.swift; sourceTree = "<group>"; };
+		B2AB2B6E2F528C5700841681 /* ReflectionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionHistoryView.swift; sourceTree = "<group>"; };
+		B2AB2B722F528F9E00841681 /* MindfulMornings.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = MindfulMornings.storekit; sourceTree = "<group>"; };
+		B2B41D922C1A4D430003FF7D /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		B2B41D942C1A4D580003FF7D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B2B41D962C1A4D690003FF7D /* MantraSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MantraSelectionView.swift; sourceTree = "<group>"; };
+		B2B41D982C1A4D780003FF7D /* CustomMantrasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMantrasView.swift; sourceTree = "<group>"; };
+		B2B41D9A2C1A4D890003FF7D /* PresetMantrasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetMantrasView.swift; sourceTree = "<group>"; };
+		B2B41D9C2C1A4D960003FF7D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B2B41D9E2C1A4DA60003FF7D /* ManageAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAccountView.swift; sourceTree = "<group>"; };
+		B2B41DA02C1A4DB30003FF7D /* TodaysRoutineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysRoutineView.swift; sourceTree = "<group>"; };
+		B2B41DA22C1B24320003FF7D /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		B2B41DA42C1B2D330003FF7D /* DonateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B24056B12C1A364400EB5C0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B24056C32C1A364A00EB5C0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B24056CD2C1A364B00EB5C0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B24056AB2C1A364400EB5C0A = {
+			isa = PBXGroup;
+			children = (
+				B24056B62C1A364400EB5C0A /* Mindful Mornings */,
+				B24056C92C1A364A00EB5C0A /* Mindful MorningsTests */,
+				B24056D32C1A364B00EB5C0A /* Mindful MorningsUITests */,
+				B24056B52C1A364400EB5C0A /* Products */,
+				B2B41DA62C1B877C0003FF7D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B24056B52C1A364400EB5C0A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B24056B42C1A364400EB5C0A /* Mindful Mornings.app */,
+				B24056C62C1A364A00EB5C0A /* Mindful MorningsTests.xctest */,
+				B24056D02C1A364B00EB5C0A /* Mindful MorningsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B24056B62C1A364400EB5C0A /* Mindful Mornings */ = {
+			isa = PBXGroup;
+			children = (
+				B256B2A32F52927E004F084B /* Notifications 2 */,
+				B24EFB622F416FB70094915E /* Theme.swift */,
+				B2B41D912C1A4C7D0003FF7D /* Services */,
+				B2B41D902C1A4C710003FF7D /* ViewModels */,
+				B2B41D8F2C1A4C680003FF7D /* Views */,
+				B2B41D8E2C1A4C5F0003FF7D /* Models */,
+				B24056B72C1A364400EB5C0A /* Mindful_MorningsApp.swift */,
+				B24056B92C1A364400EB5C0A /* ContentView.swift */,
+				B24056BD2C1A364A00EB5C0A /* Assets.xcassets */,
+				B24056BF2C1A364A00EB5C0A /* Preview Content */,
+				B2AB2B722F528F9E00841681 /* MindfulMornings.storekit */,
+			);
+			path = "Mindful Mornings";
+			sourceTree = "<group>";
+		};
+		B24056BF2C1A364A00EB5C0A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B24056C02C1A364A00EB5C0A /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B24056C92C1A364A00EB5C0A /* Mindful MorningsTests */ = {
+			isa = PBXGroup;
+			children = (
+				B24056CA2C1A364A00EB5C0A /* Mindful_MorningsTests.swift */,
+			);
+			path = "Mindful MorningsTests";
+			sourceTree = "<group>";
+		};
+		B24056D32C1A364B00EB5C0A /* Mindful MorningsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B24056D42C1A364B00EB5C0A /* Mindful_MorningsUITests.swift */,
+				B24056D62C1A364B00EB5C0A /* Mindful_MorningsUITestsLaunchTests.swift */,
+			);
+			path = "Mindful MorningsUITests";
+			sourceTree = "<group>";
+		};
+		B256B2A32F52927E004F084B /* Notifications 2 */ = {
+			isa = PBXGroup;
+			children = (
+				B256B2A22F52927E004F084B /* NotificationManager.swift */,
+			);
+			path = "Notifications 2";
+			sourceTree = "<group>";
+		};
+		B2B41D8E2C1A4C5F0003FF7D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B2AB2B6A2F528C0F00841681 /* ReflectionEntry.swift */,
+				B2B41DA22C1B24320003FF7D /* UserData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B2B41D8F2C1A4C680003FF7D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B2AB2B682F528A0900841681 /* HabitHeatmapView.swift */,
+				B2B41D922C1A4D430003FF7D /* LandingView.swift */,
+				B2B41D942C1A4D580003FF7D /* LoginView.swift */,
+				B2B41D962C1A4D690003FF7D /* MantraSelectionView.swift */,
+				B2B41D982C1A4D780003FF7D /* CustomMantrasView.swift */,
+				B2AB2B6E2F528C5700841681 /* ReflectionHistoryView.swift */,
+				B2AB2B6C2F528C3300841681 /* EveningReflectionSurveyView.swift */,
+				B2B41D9A2C1A4D890003FF7D /* PresetMantrasView.swift */,
+				B2B41D9C2C1A4D960003FF7D /* HomeView.swift */,
+				B2B41D9E2C1A4DA60003FF7D /* ManageAccountView.swift */,
+				B2B41DA02C1A4DB30003FF7D /* TodaysRoutineView.swift */,
+				B2B41DA42C1B2D330003FF7D /* DonateView.swift */,
+				B256B2A52F529650004F084B /* OnboardingCarouselView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B2B41D902C1A4C710003FF7D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B2B41D912C1A4C7D0003FF7D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B2B41DA62C1B877C0003FF7D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B24056B32C1A364400EB5C0A /* Mindful Mornings */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B24056DA2C1A364B00EB5C0A /* Build configuration list for PBXNativeTarget "Mindful Mornings" */;
+			buildPhases = (
+				B24056B02C1A364400EB5C0A /* Sources */,
+				B24056B12C1A364400EB5C0A /* Frameworks */,
+				B24056B22C1A364400EB5C0A /* Resources */,
+				B2B41DAD2C1B877C0003FF7D /* Embed PlugIns */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Mindful Mornings";
+			productName = "Mindful Mornings";
+			productReference = B24056B42C1A364400EB5C0A /* Mindful Mornings.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B24056C52C1A364A00EB5C0A /* Mindful MorningsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B24056DD2C1A364B00EB5C0A /* Build configuration list for PBXNativeTarget "Mindful MorningsTests" */;
+			buildPhases = (
+				B24056C22C1A364A00EB5C0A /* Sources */,
+				B24056C32C1A364A00EB5C0A /* Frameworks */,
+				B24056C42C1A364A00EB5C0A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B24056C82C1A364A00EB5C0A /* PBXTargetDependency */,
+			);
+			name = "Mindful MorningsTests";
+			productName = "Mindful MorningsTests";
+			productReference = B24056C62C1A364A00EB5C0A /* Mindful MorningsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B24056CF2C1A364B00EB5C0A /* Mindful MorningsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B24056E02C1A364B00EB5C0A /* Build configuration list for PBXNativeTarget "Mindful MorningsUITests" */;
+			buildPhases = (
+				B24056CC2C1A364B00EB5C0A /* Sources */,
+				B24056CD2C1A364B00EB5C0A /* Frameworks */,
+				B24056CE2C1A364B00EB5C0A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B24056D22C1A364B00EB5C0A /* PBXTargetDependency */,
+			);
+			name = "Mindful MorningsUITests";
+			productName = "Mindful MorningsUITests";
+			productReference = B24056D02C1A364B00EB5C0A /* Mindful MorningsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B24056AC2C1A364400EB5C0A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					B24056B32C1A364400EB5C0A = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					B24056C52C1A364A00EB5C0A = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = B24056B32C1A364400EB5C0A;
+					};
+					B24056CF2C1A364B00EB5C0A = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = B24056B32C1A364400EB5C0A;
+					};
+				};
+			};
+			buildConfigurationList = B24056AF2C1A364400EB5C0A /* Build configuration list for PBXProject "Mindful Mornings" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B24056AB2C1A364400EB5C0A;
+			productRefGroup = B24056B52C1A364400EB5C0A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B24056B32C1A364400EB5C0A /* Mindful Mornings */,
+				B24056C52C1A364A00EB5C0A /* Mindful MorningsTests */,
+				B24056CF2C1A364B00EB5C0A /* Mindful MorningsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B24056B22C1A364400EB5C0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2AB2B732F528F9E00841681 /* MindfulMornings.storekit in Resources */,
+				B24056C12C1A364A00EB5C0A /* Preview Assets.xcassets in Resources */,
+				B24056BE2C1A364A00EB5C0A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B24056C42C1A364A00EB5C0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B24056CE2C1A364B00EB5C0A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B24056B02C1A364400EB5C0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2AB2B692F528A0900841681 /* HabitHeatmapView.swift in Sources */,
+				B2B41D932C1A4D430003FF7D /* LandingView.swift in Sources */,
+				B24056BA2C1A364400EB5C0A /* ContentView.swift in Sources */,
+				B2B41D972C1A4D690003FF7D /* MantraSelectionView.swift in Sources */,
+				B2AB2B6D2F528C3300841681 /* EveningReflectionSurveyView.swift in Sources */,
+				B2B41D9B2C1A4D890003FF7D /* PresetMantrasView.swift in Sources */,
+				B24EFB632F416FB70094915E /* Theme.swift in Sources */,
+				B2B41D952C1A4D580003FF7D /* LoginView.swift in Sources */,
+				B2B41DA52C1B2D330003FF7D /* DonateView.swift in Sources */,
+				B2AB2B6F2F528C5700841681 /* ReflectionHistoryView.swift in Sources */,
+				B2B41DA32C1B24320003FF7D /* UserData.swift in Sources */,
+				B2B41D9D2C1A4D960003FF7D /* HomeView.swift in Sources */,
+				B256B2A42F52927E004F084B /* NotificationManager.swift in Sources */,
+				B2AB2B6B2F528C0F00841681 /* ReflectionEntry.swift in Sources */,
+				B2B41D992C1A4D780003FF7D /* CustomMantrasView.swift in Sources */,
+				B2B41DA12C1A4DB30003FF7D /* TodaysRoutineView.swift in Sources */,
+				B24056B82C1A364400EB5C0A /* Mindful_MorningsApp.swift in Sources */,
+				B256B2A62F529651004F084B /* OnboardingCarouselView.swift in Sources */,
+				B2B41D9F2C1A4DA60003FF7D /* ManageAccountView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B24056C22C1A364A00EB5C0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B24056CB2C1A364A00EB5C0A /* Mindful_MorningsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B24056CC2C1A364B00EB5C0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B24056D52C1A364B00EB5C0A /* Mindful_MorningsUITests.swift in Sources */,
+				B24056D72C1A364B00EB5C0A /* Mindful_MorningsUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B24056C82C1A364A00EB5C0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B24056B32C1A364400EB5C0A /* Mindful Mornings */;
+			targetProxy = B24056C72C1A364A00EB5C0A /* PBXContainerItemProxy */;
+		};
+		B24056D22C1A364B00EB5C0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B24056B32C1A364400EB5C0A /* Mindful Mornings */;
+			targetProxy = B24056D12C1A364B00EB5C0A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B24056D82C1A364B00EB5C0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B24056D92C1A364B00EB5C0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B24056DB2C1A364B00EB5C0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Mindful Mornings/Preview Content\"";
+				DEVELOPMENT_TEAM = 3QFK9GYAN8;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindfulmorningsapp.Mindful-Mornings";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B24056DC2C1A364B00EB5C0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Mindful Mornings/Preview Content\"";
+				DEVELOPMENT_TEAM = 3QFK9GYAN8;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindfulmorningsapp.Mindful-Mornings";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B24056DE2C1A364B00EB5C0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3QFK9GYAN8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindfulmorningsapp.Mindful-MorningsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mindful Mornings.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Mindful Mornings";
+			};
+			name = Debug;
+		};
+		B24056DF2C1A364B00EB5C0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3QFK9GYAN8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindfulmorningsapp.Mindful-MorningsTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mindful Mornings.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Mindful Mornings";
+			};
+			name = Release;
+		};
+		B24056E12C1A364B00EB5C0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3QFK9GYAN8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindfulmorningsapp.Mindful-MorningsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Mindful Mornings";
+			};
+			name = Debug;
+		};
+		B24056E22C1A364B00EB5C0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3QFK9GYAN8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindfulmorningsapp.Mindful-MorningsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Mindful Mornings";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B24056AF2C1A364400EB5C0A /* Build configuration list for PBXProject "Mindful Mornings" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B24056D82C1A364B00EB5C0A /* Debug */,
+				B24056D92C1A364B00EB5C0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B24056DA2C1A364B00EB5C0A /* Build configuration list for PBXNativeTarget "Mindful Mornings" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B24056DB2C1A364B00EB5C0A /* Debug */,
+				B24056DC2C1A364B00EB5C0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B24056DD2C1A364B00EB5C0A /* Build configuration list for PBXNativeTarget "Mindful MorningsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B24056DE2C1A364B00EB5C0A /* Debug */,
+				B24056DF2C1A364B00EB5C0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B24056E02C1A364B00EB5C0A /* Build configuration list for PBXNativeTarget "Mindful MorningsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B24056E12C1A364B00EB5C0A /* Debug */,
+				B24056E22C1A364B00EB5C0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B24056AC2C1A364400EB5C0A /* Project object */;
+}
