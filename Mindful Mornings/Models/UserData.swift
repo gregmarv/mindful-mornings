@@ -36,9 +36,9 @@ class UserData: ObservableObject {
     @Published var focusArea: String {
         didSet { UserDefaults.standard.set(focusArea, forKey: "focusArea") }
     }
-
-    // Password is not persisted for security reasons
-    @Published var password: String = ""
+    @Published var reminderTime: String {
+        didSet { UserDefaults.standard.set(reminderTime, forKey: "reminderTime") }
+    }
 
     init() {
         self.email = UserDefaults.standard.string(forKey: "userEmail") ?? ""
@@ -50,6 +50,7 @@ class UserData: ObservableObject {
         self.reflectionEntries = UserData.loadReflectionEntries()
         self.completedDates = UserData.loadCompletedDates()
         self.focusArea = UserDefaults.standard.string(forKey: "focusArea") ?? ""
+        self.reminderTime = UserDefaults.standard.string(forKey: "reminderTime") ?? ""
     }
 
     // MARK: - Mantra Management
@@ -144,11 +145,7 @@ class UserData: ObservableObject {
         return weights
     }
 
-    // MARK: - Account Management
-
-    func updateEmail(_ newEmail: String) { email = newEmail }
-    func updatePassword(_ newPassword: String) { password = newPassword }
-    func updateUseFaceID(_ newValue: Bool) { useFaceID = newValue }
+    // MARK: - Settings
 
     func completeOnboarding() {
         isOnboarded = true
@@ -156,7 +153,6 @@ class UserData: ObservableObject {
 
     func resetAccount() {
         email = ""
-        password = ""
         useFaceID = false
         mantras = []
         mantraWeights = [:]
@@ -223,7 +219,7 @@ class UserData: ObservableObject {
         // Calm
         ThemedMantra(text: "I choose presence over perfection", theme: "calm"),
         ThemedMantra(text: "I don't need everything to be perfect to have a good day", theme: "calm"),
-        ThemedMantra(text: "I am allowed to slow down", theme: "calm"),
+        ThemedMantra(text: "I can move at my own pace without rushing", theme: "calm"),
         ThemedMantra(text: "Peace is always one breath away", theme: "calm"),
         ThemedMantra(text: "I release what I can't control", theme: "calm"),
         // Grief

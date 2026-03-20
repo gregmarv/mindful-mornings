@@ -9,7 +9,7 @@ Review each item below. Mark any you'd like replaced, reworded, or removed.
 ### Finding calm
 1. I choose presence over perfection
 2. I don't need everything to be perfect to have a good day
-3. I am allowed to slow down
+3. I can move at my own pace without rushing
 4. Peace is always one breath away
 5. I release what I can't control
 

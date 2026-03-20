@@ -15,9 +15,13 @@ struct Mindful_MorningsApp: App {
 
     init() {
         #if DEBUG
-        // Reset onboarding state so the full flow can be tested from scratch.
+        // Reset all state so the full flow can be tested from scratch.
         // Remove this block (or set to false) before submitting to the App Store.
         UserDefaults.standard.set(false, forKey: "isOnboarded")
+        UserDefaults.standard.removeObject(forKey: "completedDates")
+        UserDefaults.standard.removeObject(forKey: "userMantras")
+        UserDefaults.standard.removeObject(forKey: "mantraWeights")
+        UserDefaults.standard.removeObject(forKey: "focusArea")
         #endif
         // Register notification delegate before app finishes launching
         UNUserNotificationCenter.current().delegate = NotificationDelegate.shared

@@ -9,6 +9,11 @@ struct OnboardingCarouselView: View {
     @State private var currentPage = 0
     @State private var navigateToFocus = false
 
+    @State private var showValueProp = true
+    @State private var headlineVisible = false
+    @State private var sublineVisible = false
+    @State private var valuePropButtonVisible = false
+
     private let pages: [OnboardingPage] = [
         OnboardingPage(
             icon: "leaf.fill",
@@ -34,53 +39,116 @@ struct OnboardingCarouselView: View {
         ZStack {
             Color.mmBackground.ignoresSafeArea()
 
-            VStack(spacing: 0) {
-                // Page carousel
-                TabView(selection: $currentPage) {
-                    ForEach(pages.indices, id: \.self) { index in
-                        pageView(pages[index])
-                            .tag(index)
-                    }
-                }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                .animation(.easeInOut, value: currentPage)
-
-                // Bottom controls
-                VStack(spacing: 24) {
-                    // Page dots
-                    HStack(spacing: 8) {
+            if showValueProp {
+                valuePropView
+                    .transition(.opacity)
+            } else {
+                VStack(spacing: 0) {
+                    // Page carousel
+                    TabView(selection: $currentPage) {
                         ForEach(pages.indices, id: \.self) { index in
-                            Capsule()
-                                .fill(index == currentPage ? Color.mmPrimary : Color.mmDivider)
-                                .frame(width: index == currentPage ? 20 : 8, height: 8)
-                                .animation(.easeInOut(duration: 0.25), value: currentPage)
+                            pageView(pages[index])
+                                .tag(index)
                         }
                     }
+                    .tabViewStyle(.page(indexDisplayMode: .never))
+                    .animation(.easeInOut, value: currentPage)
 
-                    // Button
-                    Button(action: advance) {
-                        Text(currentPage < pages.count - 1 ? "Next" : "Get Started")
-                    }
-                    .buttonStyle(MMPrimaryButtonStyle())
-                    .padding(.horizontal, 48)
-
-                    // Skip
-                    if currentPage < pages.count - 1 {
-                        Button(action: { navigateToFocus = true }) {
-                            Text("Skip")
-                                .font(.system(size: 14, design: .rounded))
-                                .foregroundColor(.mmTextSecondary)
+                    // Bottom controls
+                    VStack(spacing: 24) {
+                        // Page dots
+                        HStack(spacing: 8) {
+                            ForEach(pages.indices, id: \.self) { index in
+                                Capsule()
+                                    .fill(index == currentPage ? Color.mmPrimary : Color.mmDivider)
+                                    .frame(width: index == currentPage ? 20 : 8, height: 8)
+                                    .animation(.easeInOut(duration: 0.25), value: currentPage)
+                            }
                         }
-                    } else {
-                        Spacer().frame(height: 20)
+
+                        // Button
+                        Button(action: advance) {
+                            Text(currentPage < pages.count - 1 ? "Next" : "Get Started")
+                        }
+                        .buttonStyle(MMPrimaryButtonStyle())
+                        .padding(.horizontal, 48)
+
+                        // Skip
+                        if currentPage < pages.count - 1 {
+                            Button(action: { navigateToFocus = true }) {
+                                Text("Skip")
+                                    .font(.system(size: 14, design: .rounded))
+                                    .foregroundColor(.mmTextSecondary)
+                            }
+                        } else {
+                            Spacer().frame(height: 20)
+                        }
                     }
+                    .padding(.bottom, 48)
                 }
-                .padding(.bottom, 48)
+                .transition(.opacity)
             }
         }
         .navigationBarHidden(true)
         .navigationDestination(isPresented: $navigateToFocus) {
             FocusSelectionView()
+        }
+    }
+
+    // MARK: - Value Prop Screen (animated, unique layout)
+
+    private var valuePropView: some View {
+        VStack(spacing: 0) {
+            Spacer()
+
+            VStack(spacing: 28) {
+                Text("Studies show that a short daily gratitude practice can meaningfully improve mood, reduce stress, and increase life satisfaction.")
+                    .font(.system(size: 24, weight: .semibold, design: .rounded))
+                    .foregroundColor(.mmText)
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(6)
+                    .padding(.horizontal, 32)
+                    .opacity(headlineVisible ? 1 : 0)
+                    .offset(y: headlineVisible ? 0 : 20)
+
+                Text("Our goal is to make that as simple\nand personal as possible for you.")
+                    .font(.system(size: 16, design: .rounded))
+                    .foregroundColor(.mmTextSecondary)
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(4)
+                    .padding(.horizontal, 40)
+                    .opacity(sublineVisible ? 1 : 0)
+                    .offset(y: sublineVisible ? 0 : 12)
+            }
+
+            Spacer()
+
+            Button(action: {
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    showValueProp = false
+                }
+            }) {
+                Text("Continue")
+            }
+            .buttonStyle(MMPrimaryButtonStyle())
+            .padding(.horizontal, 48)
+            .opacity(valuePropButtonVisible ? 1 : 0)
+            .padding(.bottom, 48)
+        }
+        .onAppear {
+            withAnimation(.easeOut(duration: 1.0)) {
+                headlineVisible = true
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                withAnimation(.easeOut(duration: 0.8)) {
+                    sublineVisible = true
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.2) {
+                withAnimation(.easeOut(duration: 0.6)) {
+                    valuePropButtonVisible = true
+                }
+            }
         }
     }
 

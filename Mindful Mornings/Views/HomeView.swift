@@ -10,6 +10,10 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var userData: UserData
 
+    private var todayComplete: Bool {
+        userData.isCompleted(on: Date())
+    }
+
     // Time-aware greeting
     private var greeting: String {
         let hour = Calendar.current.component(.hour, from: Date())
@@ -68,24 +72,40 @@ struct HomeView: View {
 
                 // Center content
                 VStack(spacing: 16) {
-                    Image(systemName: "sun.horizon.fill")
-                        .font(.system(size: 52))
-                        .foregroundStyle(
-                            LinearGradient(
-                                colors: [.mmAccent, .mmPrimary],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
+                    if todayComplete {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.system(size: 52))
+                            .foregroundColor(.mmSuccess)
+                            .padding(.bottom, 8)
+
+                        Text("You're all set today")
+                            .font(.system(size: 28, weight: .semibold, design: .rounded))
+                            .foregroundColor(.mmText)
+
+                        Text("Your morning routine is done.\nEnjoy the rest of your day.")
+                            .font(.system(size: 16, design: .rounded))
+                            .foregroundColor(.mmTextSecondary)
+                            .multilineTextAlignment(.center)
+                    } else {
+                        Image(systemName: "sun.horizon.fill")
+                            .font(.system(size: 52))
+                            .foregroundStyle(
+                                LinearGradient(
+                                    colors: [.mmAccent, .mmPrimary],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
                             )
-                        )
-                        .padding(.bottom, 8)
+                            .padding(.bottom, 8)
 
-                    Text(greeting)
-                        .font(.system(size: 28, weight: .semibold, design: .rounded))
-                        .foregroundColor(.mmText)
+                        Text(greeting)
+                            .font(.system(size: 28, weight: .semibold, design: .rounded))
+                            .foregroundColor(.mmText)
 
-                    Text(greetingSubtitle)
-                        .font(.system(size: 16, design: .rounded))
-                        .foregroundColor(.mmTextSecondary)
+                        Text(greetingSubtitle)
+                            .font(.system(size: 16, design: .rounded))
+                            .foregroundColor(.mmTextSecondary)
+                    }
 
                     // Streak badge
                     if userData.currentStreak > 0 {
@@ -110,13 +130,22 @@ struct HomeView: View {
 
                 Spacer()
 
-                // Start button
-                NavigationLink(destination: TodaysRoutineView()) {
-                    Text("Start Today's Routine")
+                // Start / repeat button
+                if todayComplete {
+                    NavigationLink(destination: TodaysRoutineView()) {
+                        Text("Revisit Today's Routine")
+                    }
+                    .buttonStyle(MMSecondaryButtonStyle())
+                    .padding(.horizontal, 40)
+                    .padding(.bottom, 48)
+                } else {
+                    NavigationLink(destination: TodaysRoutineView()) {
+                        Text("Start Today's Routine")
+                    }
+                    .buttonStyle(MMPrimaryButtonStyle())
+                    .padding(.horizontal, 40)
+                    .padding(.bottom, 48)
                 }
-                .buttonStyle(MMPrimaryButtonStyle())
-                .padding(.horizontal, 40)
-                .padding(.bottom, 48)
             }
         }
         .navigationBarBackButtonHidden(true)

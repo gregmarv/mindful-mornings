@@ -9,9 +9,6 @@ import SwiftUI
 
 struct ManageAccountView: View {
     @EnvironmentObject var userData: UserData
-    @State private var email = ""
-    @State private var password = ""
-    @State private var showSavedAlert = false
     @State private var newCustomMantra = ""
 
     var body: some View {
@@ -21,6 +18,64 @@ struct ManageAccountView: View {
             ScrollView {
                 VStack(spacing: 24) {
                     Spacer().frame(height: 16)
+
+                    // Focus area section
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Focus Area")
+                            .font(.system(size: 14, weight: .semibold, design: .rounded))
+                            .foregroundColor(.mmTextSecondary)
+                            .textCase(.uppercase)
+                            .tracking(1)
+
+                        NavigationLink(destination: FocusSelectionView()) {
+                            HStack {
+                                Image(systemName: "sparkles")
+                                    .foregroundColor(.mmPrimary)
+                                    .frame(width: 24)
+                                Text(userData.focusArea.isEmpty ? "Not set" : userData.focusArea)
+                                    .font(.system(size: 16, design: .rounded))
+                                    .foregroundColor(.mmText)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 13))
+                                    .foregroundColor(.mmTextSecondary)
+                            }
+                            .padding(16)
+                            .background(Color.mmCard)
+                            .cornerRadius(12)
+                        }
+                    }
+
+                    Divider()
+                        .background(Color.mmDivider)
+
+                    // Reminders section
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Reminders")
+                            .font(.system(size: 14, weight: .semibold, design: .rounded))
+                            .foregroundColor(.mmTextSecondary)
+                            .textCase(.uppercase)
+                            .tracking(1)
+
+                        HStack {
+                            Image(systemName: "bell")
+                                .foregroundColor(.mmPrimary)
+                                .frame(width: 24)
+                            Text("Morning reminder")
+                                .font(.system(size: 16, design: .rounded))
+                                .foregroundColor(.mmText)
+                            Spacer()
+                            Text(userData.reminderTime.isEmpty ? "Not set" : userData.reminderTime)
+                                .font(.system(size: 14, design: .rounded))
+                                .foregroundColor(.mmTextSecondary)
+                        }
+                        .padding(16)
+                        .background(Color.mmCard)
+                        .cornerRadius(12)
+                    }
+
+                    Divider()
+                        .background(Color.mmDivider)
 
                     // Mantra deck section
                     VStack(alignment: .leading, spacing: 12) {
@@ -88,72 +143,6 @@ struct ManageAccountView: View {
                             )
                         }
                     }
-
-                    Divider()
-                        .background(Color.mmDivider)
-
-                    // Focus area section
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Focus Area")
-                            .font(.system(size: 14, weight: .semibold, design: .rounded))
-                            .foregroundColor(.mmTextSecondary)
-                            .textCase(.uppercase)
-                            .tracking(1)
-
-                        NavigationLink(destination: FocusSelectionView()) {
-                            HStack {
-                                Image(systemName: "sparkles")
-                                    .foregroundColor(.mmPrimary)
-                                    .frame(width: 24)
-                                Text(userData.focusArea.isEmpty ? "Not set" : userData.focusArea)
-                                    .font(.system(size: 16, design: .rounded))
-                                    .foregroundColor(.mmText)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .font(.system(size: 13))
-                                    .foregroundColor(.mmTextSecondary)
-                            }
-                            .padding(16)
-                            .background(Color.mmCard)
-                            .cornerRadius(12)
-                        }
-                    }
-
-                    Divider()
-                        .background(Color.mmDivider)
-
-                    // Account details section
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Account")
-                            .font(.system(size: 14, weight: .semibold, design: .rounded))
-                            .foregroundColor(.mmTextSecondary)
-                            .textCase(.uppercase)
-                            .tracking(1)
-
-                        TextField("Email", text: $email)
-                            .keyboardType(.emailAddress)
-                            .autocapitalization(.none)
-                            .font(.system(size: 16, design: .rounded))
-                            .mmTextField()
-
-                        SecureField("New Password", text: $password)
-                            .font(.system(size: 16, design: .rounded))
-                            .mmTextField()
-                    }
-
-                    Button(action: {
-                        if !email.isEmpty {
-                            userData.updateEmail(email)
-                        }
-                        if !password.isEmpty {
-                            userData.updatePassword(password)
-                        }
-                        showSavedAlert = true
-                    }) {
-                        Text("Save Changes")
-                    }
-                    .buttonStyle(MMPrimaryButtonStyle())
-                    .padding(.top, 4)
                 }
                 .padding(.horizontal, 24)
                 .padding(.bottom, 40)
@@ -161,11 +150,5 @@ struct ManageAccountView: View {
         }
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            email = userData.email
-        }
-        .alert("Changes Saved", isPresented: $showSavedAlert) {
-            Button("OK", role: .cancel) { }
-        }
     }
 }
