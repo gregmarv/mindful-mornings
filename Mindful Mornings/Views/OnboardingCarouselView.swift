@@ -7,7 +7,7 @@ import SwiftUI
 
 struct OnboardingCarouselView: View {
     @State private var currentPage = 0
-    @State private var navigateToLogin = false
+    @State private var navigateToFocus = false
 
     private let pages: [OnboardingPage] = [
         OnboardingPage(
@@ -26,7 +26,7 @@ struct OnboardingCarouselView: View {
             icon: "moon.stars.fill",
             iconColors: [Color(red: 0.55, green: 0.45, blue: 0.75), Color(red: 0.47, green: 0.68, blue: 0.58)],
             title: "Close the day\nwith intention",
-            body: "An optional evening check-in asks how your day went — two quick ratings that build into a picture of your wellbeing over time."
+            body: "An optional evening check-in lets you reflect on your day — two quick ratings that build into a picture of your wellbeing over time."
         ),
     ]
 
@@ -66,7 +66,7 @@ struct OnboardingCarouselView: View {
 
                     // Skip
                     if currentPage < pages.count - 1 {
-                        Button(action: { navigateToLogin = true }) {
+                        Button(action: { navigateToFocus = true }) {
                             Text("Skip")
                                 .font(.system(size: 14, design: .rounded))
                                 .foregroundColor(.mmTextSecondary)
@@ -79,8 +79,8 @@ struct OnboardingCarouselView: View {
             }
         }
         .navigationBarHidden(true)
-        .navigationDestination(isPresented: $navigateToLogin) {
-            LoginView()
+        .navigationDestination(isPresented: $navigateToFocus) {
+            FocusSelectionView()
         }
     }
 
@@ -135,7 +135,7 @@ struct OnboardingCarouselView: View {
         if currentPage < pages.count - 1 {
             withAnimation { currentPage += 1 }
         } else {
-            navigateToLogin = true
+            navigateToFocus = true
         }
     }
 }

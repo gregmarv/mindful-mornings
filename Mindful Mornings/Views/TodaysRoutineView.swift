@@ -13,6 +13,7 @@ struct TodaysRoutineView: View {
     @State private var currentMantra: String = ""
     @State private var showMantraPhase = true
     @State private var mantraProgress: Double = 0.0
+    @State private var mantraTimerDone = false
     @State private var helpText = ""
     @State private var gratitudeText = ""
     @State private var showCompletion = false
@@ -22,11 +23,15 @@ struct TodaysRoutineView: View {
     @State private var breatheScale: CGFloat = 0.88
     @State private var breatheOpacity: Double = 0.06
 
+    // Mantra curation state
+    @State private var skippedMantras: Set<String> = []
+    @State private var mantraTimer: Timer?
+
     private let mantraDuration: Double = 7.0
 
-    // Today's rotating prompts (stable within the day)
-    private let helpPrompt = UserData.dailyPrompt(from: UserData.helpPrompts)
-    private let gratitudePrompt = UserData.dailyPrompt(from: UserData.gratitudePrompts)
+    // Today's rotating prompts — personalized based on focus area
+    @State private var helpPrompt: String = ""
+    @State private var gratitudePrompt: String = ""
 
     var body: some View {
         ZStack {
@@ -41,6 +46,14 @@ struct TodaysRoutineView: View {
             }
         }
         .navigationBarBackButtonHidden(showCompletion)
+        .onAppear {
+            if helpPrompt.isEmpty {
+                helpPrompt = userData.dailyPrompt(from: UserData.intentionPrompts)
+            }
+            if gratitudePrompt.isEmpty {
+                gratitudePrompt = userData.dailyPrompt(from: UserData.gratitudePrompts)
+            }
+        }
     }
 
     // MARK: - Mantra Phase
@@ -64,7 +77,7 @@ struct TodaysRoutineView: View {
                     .font(.system(size: 36))
                     .foregroundColor(.mmPrimary.opacity(0.6))
                     .opacity(mantraOpacity)
-                    .scaleEffect(breatheScale * 0.98 + 0.02) // subtle pulse on icon too
+                    .scaleEffect(breatheScale * 0.98 + 0.02)
 
                 Text("Today's Mantra")
                     .font(.system(size: 14, weight: .medium, design: .rounded))
@@ -79,32 +92,159 @@ struct TodaysRoutineView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 36)
                     .opacity(mantraOpacity)
+                    .id(currentMantra) // force re-render on change
 
                 Spacer()
 
-                // Progress bar
-                VStack(spacing: 8) {
-                    ProgressView(value: mantraProgress, total: 1.0)
-                        .progressViewStyle(LinearProgressViewStyle(tint: .mmPrimary))
-                        .frame(height: 4)
-                        .padding(.horizontal, 60)
+                // Bottom section — changes based on timer state
+                if mantraTimerDone {
+                    // Curation controls after breathing pause
+                    mantraCurationControls
+                        .transition(.opacity.combined(with: .move(edge: .bottom)))
+                } else {
+                    // Progress bar during breathing pause
+                    VStack(spacing: 12) {
+                        ProgressView(value: mantraProgress, total: 1.0)
+                            .progressViewStyle(LinearProgressViewStyle(tint: .mmPrimary))
+                            .frame(height: 4)
+                            .padding(.horizontal, 60)
 
-                    Text("Take a moment to reflect...")
-                        .font(.system(size: 13, design: .rounded))
-                        .foregroundColor(.mmTextSecondary)
+                        Text("Take a moment to reflect...")
+                            .font(.system(size: 13, design: .rounded))
+                            .foregroundColor(.mmTextSecondary)
+
+                        // "Show me another" available during timer
+                        Button(action: showAnotherMantra) {
+                            Text("Show me another")
+                                .font(.system(size: 13, design: .rounded))
+                                .foregroundColor(.mmPrimary.opacity(0.7))
+                        }
+                        .padding(.top, 4)
+                    }
                 }
-                .padding(.bottom, 60)
+
+                Spacer().frame(height: 48)
             }
         }
         .onAppear {
-            currentMantra = userData.randomMantra()
+            loadMantra()
             withAnimation(.easeIn(duration: 1.0)) {
                 mantraOpacity = 1.0
             }
-            // Start breathing animation
             breatheScale = 1.0
             breatheOpacity = 0.10
             startMantraTimer()
+        }
+    }
+
+    // MARK: - Mantra Curation Controls
+
+    private var mantraCurationControls: some View {
+        VStack(spacing: 16) {
+            // Primary action — continue to journal
+            Button(action: {
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    showMantraPhase = false
+                }
+            }) {
+                Text("Continue")
+            }
+            .buttonStyle(MMPrimaryButtonStyle())
+            .padding(.horizontal, 60)
+
+            // Secondary actions
+            HStack(spacing: 32) {
+                // Discard permanently
+                Button(action: discardCurrentMantra) {
+                    VStack(spacing: 4) {
+                        Image(systemName: "xmark.circle")
+                            .font(.system(size: 20))
+                        Text("Not for me")
+                            .font(.system(size: 11, design: .rounded))
+                    }
+                    .foregroundColor(.mmTextSecondary)
+                }
+
+                // Show another (skip)
+                Button(action: showAnotherMantra) {
+                    VStack(spacing: 4) {
+                        Image(systemName: "arrow.triangle.2.circlepath")
+                            .font(.system(size: 20))
+                        Text("Another")
+                            .font(.system(size: 11, design: .rounded))
+                    }
+                    .foregroundColor(.mmTextSecondary)
+                }
+
+                // Like
+                Button(action: likeCurrentMantra) {
+                    VStack(spacing: 4) {
+                        Image(systemName: "heart.fill")
+                            .font(.system(size: 20))
+                        Text("Love this")
+                            .font(.system(size: 11, design: .rounded))
+                    }
+                    .foregroundColor(.mmPrimary)
+                }
+            }
+        }
+    }
+
+    // MARK: - Mantra Actions
+
+    private func loadMantra() {
+        currentMantra = userData.weightedRandomMantra(excluding: skippedMantras)
+    }
+
+    private func showAnotherMantra() {
+        userData.skipMantra(currentMantra)
+        skippedMantras.insert(currentMantra)
+
+        // Reset timer and load new mantra
+        mantraTimer?.invalidate()
+        mantraTimerDone = false
+        mantraProgress = 0.0
+
+        withAnimation(.easeInOut(duration: 0.3)) {
+            mantraOpacity = 0.0
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            loadMantra()
+            withAnimation(.easeIn(duration: 0.8)) {
+                mantraOpacity = 1.0
+            }
+            startMantraTimer()
+        }
+    }
+
+    private func discardCurrentMantra() {
+        let discarded = currentMantra
+        userData.discardMantra(discarded)
+        skippedMantras.insert(discarded)
+
+        // Reset and show next
+        mantraTimerDone = false
+        mantraProgress = 0.0
+
+        withAnimation(.easeInOut(duration: 0.3)) {
+            mantraOpacity = 0.0
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            loadMantra()
+            withAnimation(.easeIn(duration: 0.8)) {
+                mantraOpacity = 1.0
+            }
+            startMantraTimer()
+        }
+    }
+
+    private func likeCurrentMantra() {
+        userData.likeMantra(currentMantra)
+        // Advance to journal
+        withAnimation(.easeInOut(duration: 0.5)) {
+            showMantraPhase = false
         }
     }
 
@@ -196,7 +336,6 @@ struct TodaysRoutineView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 40)
 
-            // Show updated streak if > 1
             if userData.currentStreak > 1 {
                 HStack(spacing: 6) {
                     Text("🔥")
@@ -232,14 +371,14 @@ struct TodaysRoutineView: View {
         let steps = mantraDuration / interval
         var currentStep = 0.0
 
-        Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
+        mantraTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
             currentStep += 1
             mantraProgress = currentStep / steps
 
             if currentStep >= steps {
                 timer.invalidate()
-                withAnimation(.easeInOut(duration: 0.5)) {
-                    showMantraPhase = false
+                withAnimation(.easeInOut(duration: 0.4)) {
+                    mantraTimerDone = true
                 }
             }
         }

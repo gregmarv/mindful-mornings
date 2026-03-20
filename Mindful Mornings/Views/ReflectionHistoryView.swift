@@ -195,8 +195,8 @@ struct ReflectionHistoryView: View {
 
             // Legend
             HStack(spacing: 20) {
-                legendItem(color: .mmPrimary, label: "Obligations")
-                legendItem(color: .mmAccent, label: "Contentment")
+                legendItem(color: .mmPrimary, label: "Showing up")
+                legendItem(color: .mmAccent, label: "Peace & appreciation")
             }
             .padding(.horizontal, 20)
 

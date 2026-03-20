@@ -16,10 +16,11 @@ struct LandingView: View {
 
             VStack(spacing: 0) {
                 Spacer()
+                Spacer()
 
                 // Icon
                 Image(systemName: "sun.horizon.fill")
-                    .font(.system(size: 56))
+                    .font(.system(size: 52))
                     .foregroundStyle(
                         LinearGradient(
                             colors: [.mmAccent, .mmPrimary],
@@ -27,22 +28,43 @@ struct LandingView: View {
                             endPoint: .bottomTrailing
                         )
                     )
-                    .padding(.bottom, 24)
+                    .padding(.bottom, 28)
                     .opacity(appear ? 1 : 0)
                     .offset(y: appear ? 0 : 10)
 
+                // Title
                 Text("Mindful Mornings")
-                    .font(.system(size: 32, weight: .semibold, design: .rounded))
+                    .font(.system(size: 30, weight: .semibold, design: .rounded))
                     .foregroundColor(.mmText)
-                    .padding(.bottom, 8)
+                    .padding(.bottom, 12)
                     .opacity(appear ? 1 : 0)
 
-                Text("Brief and simple daily mental health habits")
-                    .font(.system(size: 16, design: .rounded))
+                // Tagline
+                Text("A quiet space to begin your day.")
+                    .font(.system(size: 17, design: .rounded))
                     .foregroundColor(.mmTextSecondary)
-                    .padding(.bottom, 60)
+                    .padding(.bottom, 6)
                     .opacity(appear ? 1 : 0)
 
+                // Subtagline
+                Text("The most impactful habits are the simplest.")
+                    .font(.system(size: 14, design: .rounded))
+                    .italic()
+                    .foregroundColor(.mmTextSecondary.opacity(0.7))
+                    .padding(.bottom, 48)
+                    .opacity(appear ? 1 : 0)
+
+                // Features — minimal, just three short lines
+                VStack(spacing: 14) {
+                    featureRow(icon: "leaf.fill", text: "A personal mantra to ground you")
+                    featureRow(icon: "pencil.line", text: "Two short prompts to set your intention")
+                    featureRow(icon: "clock", text: "Under two minutes, every morning")
+                }
+                .padding(.horizontal, 48)
+                .padding(.bottom, 48)
+                .opacity(appear ? 1 : 0)
+
+                // CTA
                 NavigationLink(destination: OnboardingCarouselView()) {
                     Text("Get Started")
                 }
@@ -52,12 +74,26 @@ struct LandingView: View {
 
                 Spacer()
                 Spacer()
+                Spacer()
             }
         }
         .onAppear {
-            withAnimation(.easeOut(duration: 0.8)) {
+            withAnimation(.easeOut(duration: 1.0)) {
                 appear = true
             }
+        }
+    }
+
+    private func featureRow(icon: String, text: String) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: icon)
+                .font(.system(size: 14))
+                .foregroundColor(.mmPrimary)
+                .frame(width: 20)
+            Text(text)
+                .font(.system(size: 15, design: .rounded))
+                .foregroundColor(.mmTextSecondary)
+            Spacer()
         }
     }
 }

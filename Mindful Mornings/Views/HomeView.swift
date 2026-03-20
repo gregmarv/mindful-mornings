@@ -36,12 +36,14 @@ struct HomeView: View {
             VStack(spacing: 0) {
                 // Top bar
                 HStack {
-                    NavigationLink(destination: DonateView()) {
-                        Image(systemName: "heart")
-                            .font(.system(size: 18))
-                            .foregroundColor(.mmPrimary)
-                            .padding(10)
-                            .background(Circle().fill(Color.mmCard))
+                    if userData.currentStreak >= 7 {
+                        NavigationLink(destination: DonateView()) {
+                            Image(systemName: "heart")
+                                .font(.system(size: 18))
+                                .foregroundColor(.mmPrimary)
+                                .padding(10)
+                                .background(Circle().fill(Color.mmCard))
+                        }
                     }
                     Spacer()
                     NavigationLink(destination: ReflectionHistoryView()) {

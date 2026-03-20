@@ -12,6 +12,7 @@ struct ManageAccountView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var showSavedAlert = false
+    @State private var newCustomMantra = ""
 
     var body: some View {
         ZStack {
@@ -21,38 +22,90 @@ struct ManageAccountView: View {
                 VStack(spacing: 24) {
                     Spacer().frame(height: 16)
 
-                    // Mantra management section
+                    // Mantra deck section
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Mantras")
+                        Text("Your Mantras")
                             .font(.system(size: 14, weight: .semibold, design: .rounded))
                             .foregroundColor(.mmTextSecondary)
                             .textCase(.uppercase)
                             .tracking(1)
 
-                        NavigationLink(destination: CustomMantrasView()) {
-                            HStack {
-                                Image(systemName: "pencil.line")
+                        Text("\(userData.mantras.count) in your deck")
+                            .font(.system(size: 13, design: .rounded))
+                            .foregroundColor(.mmTextSecondary)
+
+                        // Add custom mantra
+                        HStack(spacing: 10) {
+                            TextField("Add your own mantra...", text: $newCustomMantra)
+                                .font(.system(size: 15, design: .rounded))
+                                .mmTextField()
+
+                            Button(action: {
+                                userData.addCustomMantra(newCustomMantra)
+                                newCustomMantra = ""
+                            }) {
+                                Image(systemName: "plus.circle.fill")
+                                    .font(.system(size: 28))
                                     .foregroundColor(.mmPrimary)
-                                    .frame(width: 24)
-                                Text("Edit Custom Mantras")
-                                    .font(.system(size: 16, design: .rounded))
-                                    .foregroundColor(.mmText)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .font(.system(size: 13))
-                                    .foregroundColor(.mmTextSecondary)
                             }
-                            .padding(16)
-                            .background(Color.mmCard)
-                            .cornerRadius(12)
+                            .disabled(newCustomMantra.trimmingCharacters(in: .whitespaces).isEmpty)
+                            .opacity(newCustomMantra.trimmingCharacters(in: .whitespaces).isEmpty ? 0.4 : 1.0)
                         }
 
-                        NavigationLink(destination: PresetMantrasView()) {
+                        // Current mantras — swipe to delete
+                        ForEach(userData.mantras, id: \.self) { mantra in
+                            HStack(spacing: 12) {
+                                // Weight indicator
+                                let weight = userData.mantraWeights[mantra] ?? 1.0
+                                Image(systemName: weight >= 1.5 ? "heart.fill" : "circle.fill")
+                                    .font(.system(size: weight >= 1.5 ? 10 : 6))
+                                    .foregroundColor(weight >= 1.5 ? .mmPrimary : .mmDivider)
+
+                                Text(mantra)
+                                    .font(.system(size: 15, design: .rounded))
+                                    .foregroundColor(.mmText)
+
+                                Spacer()
+
+                                // Remove button
+                                Button(action: {
+                                    withAnimation {
+                                        userData.removeMantra(mantra)
+                                    }
+                                }) {
+                                    Image(systemName: "xmark.circle")
+                                        .font(.system(size: 16))
+                                        .foregroundColor(.mmTextSecondary.opacity(0.5))
+                                }
+                            }
+                            .padding(.vertical, 10)
+                            .padding(.horizontal, 14)
+                            .background(Color.mmCard)
+                            .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.mmDivider, lineWidth: 0.5)
+                            )
+                        }
+                    }
+
+                    Divider()
+                        .background(Color.mmDivider)
+
+                    // Focus area section
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Focus Area")
+                            .font(.system(size: 14, weight: .semibold, design: .rounded))
+                            .foregroundColor(.mmTextSecondary)
+                            .textCase(.uppercase)
+                            .tracking(1)
+
+                        NavigationLink(destination: FocusSelectionView()) {
                             HStack {
-                                Image(systemName: "list.bullet")
+                                Image(systemName: "sparkles")
                                     .foregroundColor(.mmPrimary)
                                     .frame(width: 24)
-                                Text("Edit Preset Mantras")
+                                Text(userData.focusArea.isEmpty ? "Not set" : userData.focusArea)
                                     .font(.system(size: 16, design: .rounded))
                                     .foregroundColor(.mmText)
                                 Spacer()
@@ -65,6 +118,9 @@ struct ManageAccountView: View {
                             .cornerRadius(12)
                         }
                     }
+
+                    Divider()
+                        .background(Color.mmDivider)
 
                     // Account details section
                     VStack(alignment: .leading, spacing: 12) {
@@ -103,7 +159,7 @@ struct ManageAccountView: View {
                 .padding(.bottom, 40)
             }
         }
-        .navigationTitle("Account")
+        .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             email = userData.email

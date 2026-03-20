@@ -8,8 +8,8 @@ import Foundation
 struct ReflectionEntry: Codable, Identifiable {
     var id: UUID
     var date: Date
-    var obligationsRating: Int   // 1–10: "I upheld my obligations to myself and others"
-    var contentmentRating: Int   // 1–10: "I felt contentment and fully appreciated my day"
+    var obligationsRating: Int   // 1–10: "I showed up for myself and the people around me"
+    var contentmentRating: Int   // 1–10: "I found moments of peace and appreciation today"
 
     init(
         id: UUID = UUID(),

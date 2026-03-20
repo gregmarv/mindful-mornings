@@ -65,14 +65,14 @@ struct EveningReflectionSurveyView: View {
                 // Question 1
                 questionBlock(
                     number: 1,
-                    prompt: "I upheld my obligations to myself and others",
+                    prompt: "I showed up for myself and the people around me",
                     selection: $obligationsRating
                 )
 
                 // Question 2
                 questionBlock(
                     number: 2,
-                    prompt: "I felt contentment and fully appreciated my day",
+                    prompt: "I found moments of peace and appreciation today",
                     selection: $contentmentRating
                 )
 
