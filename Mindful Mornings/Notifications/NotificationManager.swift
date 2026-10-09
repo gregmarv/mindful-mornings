@@ -64,7 +64,18 @@ class NotificationManager {
 class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
     static let shared = NotificationDelegate()
 
+    /// Set when the reflection notification is tapped. On a cold launch the tap can
+    /// arrive before any view is subscribed to `.showReflectionSurvey`, so the app
+    /// also checks this flag when its root view appears.
+    private(set) var pendingReflectionSurvey = false
+
     private override init() {}
+
+    /// Returns true (once) if a reflection-notification tap hasn't been handled yet.
+    func consumePendingReflectionSurvey() -> Bool {
+        defer { pendingReflectionSurvey = false }
+        return pendingReflectionSurvey
+    }
 
     // Show notification even when app is in foreground
     func userNotificationCenter(
@@ -83,6 +94,7 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
     ) {
         let userInfo = response.notification.request.content.userInfo
         if let type = userInfo["type"] as? String, type == "evening-reflection" {
+            pendingReflectionSurvey = true
             NotificationCenter.default.post(name: .showReflectionSurvey, object: nil)
         }
         completionHandler()

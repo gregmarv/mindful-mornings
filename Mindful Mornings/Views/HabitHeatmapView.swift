@@ -252,11 +252,7 @@ struct HabitHeatmapView: View {
     private var longestStreak: Int {
         let calendar = Calendar.current
         let sortedDates = userData.completedDates
-            .compactMap { key -> Date? in
-                let f = DateFormatter()
-                f.dateFormat = "yyyy-MM-dd"
-                return f.date(from: key)
-            }
+            .compactMap(UserData.date(fromKey:))
             .sorted()
 
         var longest = 0

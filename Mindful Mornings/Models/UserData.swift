@@ -9,23 +9,26 @@ import Foundation
 import SwiftUI
 
 class UserData: ObservableObject {
+    /// Backing store. Tests pass an isolated suite so they never touch real user data.
+    private let defaults: UserDefaults
+
     @Published var email: String {
-        didSet { UserDefaults.standard.set(email, forKey: "userEmail") }
+        didSet { defaults.set(email, forKey: "userEmail") }
     }
     @Published var useFaceID: Bool {
-        didSet { UserDefaults.standard.set(useFaceID, forKey: "useFaceID") }
+        didSet { defaults.set(useFaceID, forKey: "useFaceID") }
     }
     @Published var mantras: [String] {
-        didSet { UserDefaults.standard.set(mantras, forKey: "userMantras") }
+        didSet { defaults.set(mantras, forKey: "userMantras") }
     }
     @Published var mantraWeights: [String: Double] {
         didSet { saveMantraWeights() }
     }
     @Published var isOnboarded: Bool {
-        didSet { UserDefaults.standard.set(isOnboarded, forKey: "isOnboarded") }
+        didSet { defaults.set(isOnboarded, forKey: "isOnboarded") }
     }
     @Published var eveningReflectionEnabled: Bool {
-        didSet { UserDefaults.standard.set(eveningReflectionEnabled, forKey: "eveningReflectionEnabled") }
+        didSet { defaults.set(eveningReflectionEnabled, forKey: "eveningReflectionEnabled") }
     }
     @Published var reflectionEntries: [ReflectionEntry] {
         didSet { saveReflectionEntries() }
@@ -34,23 +37,24 @@ class UserData: ObservableObject {
         didSet { saveCompletedDates() }
     }
     @Published var focusArea: String {
-        didSet { UserDefaults.standard.set(focusArea, forKey: "focusArea") }
+        didSet { defaults.set(focusArea, forKey: "focusArea") }
     }
     @Published var reminderTime: String {
-        didSet { UserDefaults.standard.set(reminderTime, forKey: "reminderTime") }
+        didSet { defaults.set(reminderTime, forKey: "reminderTime") }
     }
 
-    init() {
-        self.email = UserDefaults.standard.string(forKey: "userEmail") ?? ""
-        self.useFaceID = UserDefaults.standard.bool(forKey: "useFaceID")
-        self.mantras = UserDefaults.standard.stringArray(forKey: "userMantras") ?? []
-        self.mantraWeights = UserData.loadMantraWeights()
-        self.isOnboarded = UserDefaults.standard.bool(forKey: "isOnboarded")
-        self.eveningReflectionEnabled = UserDefaults.standard.bool(forKey: "eveningReflectionEnabled")
-        self.reflectionEntries = UserData.loadReflectionEntries()
-        self.completedDates = UserData.loadCompletedDates()
-        self.focusArea = UserDefaults.standard.string(forKey: "focusArea") ?? ""
-        self.reminderTime = UserDefaults.standard.string(forKey: "reminderTime") ?? ""
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+        self.email = defaults.string(forKey: "userEmail") ?? ""
+        self.useFaceID = defaults.bool(forKey: "useFaceID")
+        self.mantras = defaults.stringArray(forKey: "userMantras") ?? []
+        self.mantraWeights = UserData.loadMantraWeights(from: defaults)
+        self.isOnboarded = defaults.bool(forKey: "isOnboarded")
+        self.eveningReflectionEnabled = defaults.bool(forKey: "eveningReflectionEnabled")
+        self.reflectionEntries = UserData.loadReflectionEntries(from: defaults)
+        self.completedDates = UserData.loadCompletedDates(from: defaults)
+        self.focusArea = defaults.string(forKey: "focusArea") ?? ""
+        self.reminderTime = defaults.string(forKey: "reminderTime") ?? ""
     }
 
     // MARK: - Mantra Management
@@ -73,6 +77,22 @@ class UserData: ObservableObject {
 
         mantras = texts
         mantraWeights = weights
+    }
+
+    /// Changes focus area after onboarding without reseeding, so custom mantras,
+    /// discards and likes are preserved. Grief presets are added or removed to match
+    /// the opt-in rule used by `seedMantras`.
+    func changeFocusArea(to area: String) {
+        focusArea = area
+        let griefPresets = UserData.presetMantras.filter { $0.theme == "grief" }.map(\.text)
+        if UserData.focusAreaToTheme[area] == "grief" {
+            for text in griefPresets where !mantras.contains(text) {
+                mantras.append(text)
+                mantraWeights[text] = 1.3
+            }
+        } else {
+            for text in griefPresets { removeMantra(text) }
+        }
     }
 
     func addCustomMantra(_ mantra: String) {
@@ -133,12 +153,12 @@ class UserData: ObservableObject {
 
     private func saveMantraWeights() {
         if let data = try? JSONEncoder().encode(mantraWeights) {
-            UserDefaults.standard.set(data, forKey: "mantraWeights")
+            defaults.set(data, forKey: "mantraWeights")
         }
     }
 
-    private static func loadMantraWeights() -> [String: Double] {
-        guard let data = UserDefaults.standard.data(forKey: "mantraWeights"),
+    private static func loadMantraWeights(from defaults: UserDefaults) -> [String: Double] {
+        guard let data = defaults.data(forKey: "mantraWeights"),
               let weights = try? JSONDecoder().decode([String: Double].self, from: data) else {
             return [:]
         }
@@ -161,6 +181,7 @@ class UserData: ObservableObject {
         reflectionEntries = []
         completedDates = []
         focusArea = ""
+        reminderTime = ""
     }
 
     // MARK: - Streak & Completion Tracking
@@ -186,18 +207,31 @@ class UserData: ObservableObject {
         return streak
     }
 
-    private static func dateKey(for date: Date) -> String {
+    /// Fixed Gregorian/POSIX formatter so keys stay "yyyy-MM-dd" regardless of the
+    /// user's calendar (e.g. Buddhist or Japanese) or locale settings.
+    private static let dateKeyFormatter: DateFormatter = {
         let f = DateFormatter()
+        f.calendar = Calendar(identifier: .gregorian)
+        f.locale = Locale(identifier: "en_US_POSIX")
+        f.timeZone = .current
         f.dateFormat = "yyyy-MM-dd"
-        return f.string(from: date)
+        return f
+    }()
+
+    static func dateKey(for date: Date) -> String {
+        dateKeyFormatter.string(from: date)
+    }
+
+    static func date(fromKey key: String) -> Date? {
+        dateKeyFormatter.date(from: key)
     }
 
     private func saveCompletedDates() {
-        UserDefaults.standard.set(Array(completedDates), forKey: "completedDates")
+        defaults.set(Array(completedDates), forKey: "completedDates")
     }
 
-    private static func loadCompletedDates() -> Set<String> {
-        let arr = UserDefaults.standard.stringArray(forKey: "completedDates") ?? []
+    private static func loadCompletedDates(from defaults: UserDefaults) -> Set<String> {
+        let arr = defaults.stringArray(forKey: "completedDates") ?? []
         return Set(arr)
     }
 
@@ -394,12 +428,12 @@ class UserData: ObservableObject {
 
     private func saveReflectionEntries() {
         if let encoded = try? JSONEncoder().encode(reflectionEntries) {
-            UserDefaults.standard.set(encoded, forKey: "reflectionEntries")
+            defaults.set(encoded, forKey: "reflectionEntries")
         }
     }
 
-    private static func loadReflectionEntries() -> [ReflectionEntry] {
-        guard let data = UserDefaults.standard.data(forKey: "reflectionEntries"),
+    private static func loadReflectionEntries(from defaults: UserDefaults) -> [ReflectionEntry] {
+        guard let data = defaults.data(forKey: "reflectionEntries"),
               let entries = try? JSONDecoder().decode([ReflectionEntry].self, from: data) else {
             return []
         }

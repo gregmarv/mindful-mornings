@@ -6,22 +6,24 @@
 //
 
 import SwiftUI
+import StoreKit
 import UserNotifications
 
 @main
 struct Mindful_MorningsApp: App {
     @StateObject private var userData = UserData()
     @State private var showReflectionSurvey = false
+    @State private var transactionListener: Task<Void, Never>?
 
     init() {
         #if DEBUG
-        // Reset all state so the full flow can be tested from scratch.
-        // Remove this block (or set to false) before submitting to the App Store.
-        UserDefaults.standard.set(false, forKey: "isOnboarded")
-        UserDefaults.standard.removeObject(forKey: "completedDates")
-        UserDefaults.standard.removeObject(forKey: "userMantras")
-        UserDefaults.standard.removeObject(forKey: "mantraWeights")
-        UserDefaults.standard.removeObject(forKey: "focusArea")
+        // Pass `-resetState` as a launch argument (Edit Scheme → Run → Arguments) to wipe
+        // all saved data and test onboarding from scratch. Off by default so streaks,
+        // history and the heatmap can be tested across launches.
+        if ProcessInfo.processInfo.arguments.contains("-resetState"),
+           let bundleID = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+        }
         #endif
         // Register notification delegate before app finishes launching
         UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
@@ -36,7 +38,26 @@ struct Mindful_MorningsApp: App {
                         .environmentObject(userData)
                 }
                 .onReceive(NotificationCenter.default.publisher(for: .showReflectionSurvey)) { _ in
-                    showReflectionSurvey = true
+                    if NotificationDelegate.shared.consumePendingReflectionSurvey() {
+                        showReflectionSurvey = true
+                    }
+                }
+                .onAppear {
+                    if NotificationDelegate.shared.consumePendingReflectionSurvey() {
+                        showReflectionSurvey = true
+                    }
+                }
+                .task {
+                    // Finish tip transactions that complete outside DonateView
+                    // (Ask to Buy approvals, interrupted purchases, etc.).
+                    guard transactionListener == nil else { return }
+                    transactionListener = Task.detached {
+                        for await update in Transaction.updates {
+                            if case .verified(let transaction) = update {
+                                await transaction.finish()
+                            }
+                        }
+                    }
                 }
         }
     }

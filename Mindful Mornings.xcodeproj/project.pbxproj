@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B2C0FFEE2F70000000A1B2C2 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B2C0FFEE2F70000000A1B2C1 /* PrivacyInfo.xcprivacy */; };
 		B2055F5C2F6CFAB600D31BE6 /* FocusSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2055F5B2F6CFAB600D31BE6 /* FocusSelectionView.swift */; };
 		B2055F632F6CFC8B00D31BE6 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2055F612F6CFC8B00D31BE6 /* NotificationManager.swift */; };
 		B24056B82C1A364400EB5C0A /* Mindful_MorningsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24056B72C1A364400EB5C0A /* Mindful_MorningsApp.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B2C0FFEE2F70000000A1B2C1 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		B2055F5B2F6CFAB600D31BE6 /* FocusSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSelectionView.swift; sourceTree = "<group>"; };
 		B2055F612F6CFC8B00D31BE6 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		B24056B42C1A364400EB5C0A /* Mindful Mornings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mindful Mornings.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,13 +116,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B2055F602F6CFC5D00D31BE6 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		B2055F622F6CFC8B00D31BE6 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,7 +149,6 @@
 			isa = PBXGroup;
 			children = (
 				B2055F622F6CFC8B00D31BE6 /* Notifications */,
-				B2055F602F6CFC5D00D31BE6 /* New Group */,
 				B24EFB622F416FB70094915E /* Theme.swift */,
 				B2B41D912C1A4C7D0003FF7D /* Services */,
 				B2B41D902C1A4C710003FF7D /* ViewModels */,
@@ -165,6 +159,7 @@
 				B24056BD2C1A364A00EB5C0A /* Assets.xcassets */,
 				B24056BF2C1A364A00EB5C0A /* Preview Content */,
 				B2AB2B722F528F9E00841681 /* MindfulMornings.storekit */,
+				B2C0FFEE2F70000000A1B2C1 /* PrivacyInfo.xcprivacy */,
 			);
 			path = "Mindful Mornings";
 			sourceTree = "<group>";
@@ -349,6 +344,7 @@
 				B2AB2B732F528F9E00841681 /* MindfulMornings.storekit in Resources */,
 				B24056C12C1A364A00EB5C0A /* Preview Assets.xcassets in Resources */,
 				B24056BE2C1A364A00EB5C0A /* Assets.xcassets in Resources */,
+				B2C0FFEE2F70000000A1B2C2 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

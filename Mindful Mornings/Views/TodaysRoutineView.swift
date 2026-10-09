@@ -54,6 +54,9 @@ struct TodaysRoutineView: View {
                 gratitudePrompt = userData.dailyPrompt(from: UserData.gratitudePrompts)
             }
         }
+        .onDisappear {
+            mantraTimer?.invalidate()
+        }
     }
 
     // MARK: - Mantra Phase
@@ -154,15 +157,17 @@ struct TodaysRoutineView: View {
 
             // Secondary actions
             HStack(spacing: 32) {
-                // Discard permanently
-                Button(action: discardCurrentMantra) {
-                    VStack(spacing: 4) {
-                        Image(systemName: "xmark.circle")
-                            .font(.system(size: 20))
-                        Text("Not for me")
-                            .font(.system(size: 11, design: .rounded))
+                // Discard permanently (never empty the deck entirely)
+                if userData.mantras.count > 1 {
+                    Button(action: discardCurrentMantra) {
+                        VStack(spacing: 4) {
+                            Image(systemName: "xmark.circle")
+                                .font(.system(size: 20))
+                            Text("Not for me")
+                                .font(.system(size: 11, design: .rounded))
+                        }
+                        .foregroundColor(.mmTextSecondary)
                     }
-                    .foregroundColor(.mmTextSecondary)
                 }
 
                 // Show another (skip)
@@ -219,6 +224,7 @@ struct TodaysRoutineView: View {
     }
 
     private func discardCurrentMantra() {
+        mantraTimer?.invalidate()
         let discarded = currentMantra
         userData.discardMantra(discarded)
         skippedMantras.insert(discarded)
