@@ -119,7 +119,7 @@ struct ReflectionHistoryView: View {
                 Spacer()
                 Toggle("", isOn: $localToggleValue)
                     .tint(.mmPrimary)
-                    .onChange(of: localToggleValue) { newValue in
+                    .onChange(of: localToggleValue) { _, newValue in
                         handleToggleChange(newValue)
                     }
             }

@@ -7,6 +7,10 @@ import SwiftUI
 
 struct FocusSelectionView: View {
     @EnvironmentObject var userData: UserData
+    @Environment(\.dismiss) private var dismiss
+    /// true when opened from Settings: saves the change and pops back instead of
+    /// reseeding the mantra deck and completing onboarding.
+    var isEditing = false
     @State private var selectedFocus: String? = nil
     @State private var navigateToHome = false
 
@@ -93,15 +97,20 @@ struct FocusSelectionView: View {
                     }
                     .padding(.horizontal, 20)
 
-                    // Continue — seeds mantras and completes onboarding
+                    // Continue — seeds mantras and completes onboarding (or saves an edit)
                     Button(action: {
                         let focus = selectedFocus ?? "Just exploring"
-                        userData.focusArea = focus
-                        userData.seedMantras(forFocusArea: focus)
-                        userData.completeOnboarding()
-                        navigateToHome = true
+                        if isEditing {
+                            userData.changeFocusArea(to: focus)
+                            dismiss()
+                        } else {
+                            userData.focusArea = focus
+                            userData.seedMantras(forFocusArea: focus)
+                            userData.completeOnboarding()
+                            navigateToHome = true
+                        }
                     }) {
-                        Text("Continue")
+                        Text(isEditing ? "Save" : "Continue")
                     }
                     .buttonStyle(MMPrimaryButtonStyle())
                     .opacity(selectedFocus != nil ? 1.0 : 0.5)
@@ -110,6 +119,11 @@ struct FocusSelectionView: View {
                     .padding(.top, 8)
                     .padding(.bottom, 40)
                 }
+            }
+        }
+        .onAppear {
+            if isEditing, selectedFocus == nil, !userData.focusArea.isEmpty {
+                selectedFocus = userData.focusArea
             }
         }
         .navigationDestination(isPresented: $navigateToHome) {

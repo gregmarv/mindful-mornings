@@ -27,7 +27,7 @@ struct ManageAccountView: View {
                             .textCase(.uppercase)
                             .tracking(1)
 
-                        NavigationLink(destination: FocusSelectionView()) {
+                        NavigationLink(destination: FocusSelectionView(isEditing: true)) {
                             HStack {
                                 Image(systemName: "sparkles")
                                     .foregroundColor(.mmPrimary)
@@ -142,6 +142,29 @@ struct ManageAccountView: View {
                                     .stroke(Color.mmDivider, lineWidth: 0.5)
                             )
                         }
+                    }
+
+                    Divider()
+                        .background(Color.mmDivider)
+
+                    // Support — always reachable (Home only shows the heart after a 7-day
+                    // streak, and App Review must be able to find the in-app purchases).
+                    NavigationLink(destination: DonateView()) {
+                        HStack {
+                            Image(systemName: "heart")
+                                .foregroundColor(.mmPrimary)
+                                .frame(width: 24)
+                            Text("Support Mindful Mornings")
+                                .font(.system(size: 16, design: .rounded))
+                                .foregroundColor(.mmText)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 13))
+                                .foregroundColor(.mmTextSecondary)
+                        }
+                        .padding(16)
+                        .background(Color.mmCard)
+                        .cornerRadius(12)
                     }
                 }
                 .padding(.horizontal, 24)
